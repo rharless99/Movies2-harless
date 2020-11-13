@@ -1,0 +1,32 @@
+/* Trying th change the button color */
+/* #search_button {
+    color: red;
+} */
+
+.banner{
+    width: 100%;
+    display: "block"
+}
+
+.banner > .image_banner{
+    width: 100%;
+    display: "block";
+    height: 355px
+}
+
+p {
+    color: red;
+    font-size: 18px;
+    padding-left: 20px;
+}
+
+#BarSummary {
+    color: green;
+    font-size: 18px;
+    margin-left: 350px;
+    font-weight: "strong";
+}
+
+/* #pierow {
+    margin-left: 300px
+} */

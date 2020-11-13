@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Movie Streaming</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/homestyle.css">
+
+
+</head>
+
+<body>
+  <div class="banner">
+    <img class = "image_banner" src="https://thenewswheel.com/wp-content/uploads/2019/01/TheNewsWheel-StreamingServices-760x400-760x400.jpg">
+  </div>
+  
+    <div class="row">
+      <div class="col-md-12 jumbotron text-center">
+        <h1>Movie Streaming Dashboard</h1>
+        <p>Click the search button below</p>
+      </div>
+    </div>
+    <button type="button" id = "search_button" class="btn btn-primary btn-lg">Movie Search
+        <a href="/search" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Click Here</a>
+    </button>
+      
+      
+    <div class="row">
+      <div class="col-md-12">
+        <div id="bar"></div>
+      </div>
+      <p id = "BarSummary">As you can see, Rotten Tomatoes and IMDB do not always agree about the success of a movie.</p>
+    
+    <div class = "pierow">
+        <div class="col-md-12">
+          <div id="piechart"></div>
+        </div>
+    </div>
+    <p id = "PieSummary">Pie Summary HERE</p>
+      
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src = "static/js/homeapp.js"></script>
+ 
+  
+  
+
+</body>
+
+</html>
