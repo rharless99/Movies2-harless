@@ -39,22 +39,26 @@ console.log("BREAK")
 // }
 
 // I need a function that updates the variables and give it to the Final Dropdown function
-var GenreFilter = d3.select("#selGenre").node().value;
+// var GenreFilter = d3.select("#selGenre").node().value;
+
 
 // var AgeFilter = d3.select("#selAge").node().value; 
-var AgeFilter = "7+" 
 
-function FirstFilterG(){
 
+// function optionGenreChanged(genre){
+//     GenreFilter = genre;
+//     FinalDropdown(genre);
     
-}
+// }
 
-function SecondFilterA(){
+// function SecondFilterAge(){
 
 
-}
+// }
 
 function FinalDropdown(){
+    var GenreFilter = "Drama"
+    var AgeFilter = "7+" 
     var MovieOptions = myData.filter(g =>{
         return g.genres === GenreFilter;
     }).filter(a =>{
@@ -73,9 +77,8 @@ function FinalDropdown(){
                 .property("value", userchoice);
         });
 
-
-
 }
+FinalDropdown();
 
 
 // Filters info to get movie titles
