@@ -1,133 +1,108 @@
-// Pull data from API
 var xhReq = new XMLHttpRequest();
 xhReq.open("GET", "/movies2", false);
 xhReq.send(null);
 var myData = JSON.parse(xhReq.responseText);
 
-// Check work
 console.log(myData);
 console.log(myData[0].age)
 console.log("BREAK")
 
 
-// transform data from array of objects to array or arrays   
-// var ArrData = myData.map(function(obj){
-//     return Object.keys(obj).map(function(key){
-//         return obj[key];
-//     });
-// });
+window.onload = function(){
+  
+  // This waits for the window to render and then loads the movies based on the current
+  // selections. The user never sees an empty movie list.
+  
+  initializePage();
+};
+function initializePage(){
+   //genre is hard coded
+   //age is hard coded
+   //movies need to be generated
+   rebuildMovieTitleList();
+}
 
-// Check work
-// console.log(ArrData)
-// console.log(ArrData[0])
-
-// Define Filter Variables
-// var GenreFilter = d3.select("#selGenre").node().value; 
-// // var AgeFilter = d3.select("#selAge").node().value; 
-// var AgeFilter = "all"
-
-
-
-// function GenreEvent(){
-//     GenreFilter = d3.select("#selGenre").node().value; 
-//     UpdateMovieList();
-// }
-
-// function AgeEvent(){
-//     AgeFilter = d3.select("#selAge").node().value; 
-//     UpdateMovieList()
-// }
-
-// I need a function that updates the variables and give it to the Final Dropdown function
-// var GenreFilter = d3.select("#selGenre").node().value;
+function rebuildMovieTitleList(){
+    let selector = "selMovie";
+    let ListOfMatchingMovies = buildMovieOptionList();
+    // Need next 4 functions below to buildMovieOptionList
+    // Next the list needs to live in the select dropdown menu 
+    clearDropDown(selector);
+    appendDropDownOptions( selector, ListOfMatchingMovies);
+    displayCurrentMovieData();
+}
 
 
-// var AgeFilter = d3.select("#selAge").node().value; 
+function buildMovieOptionList(){
+    let UserGenreChoice = getSelectedOption("selGenre");
+    let UserAgeChoice = getSelectedOption("selAge");
+    let MatchingMovieObjects = getListOfMoviesByGenreAndAge(UserGenreChoice.innerHTML, UserAgeChoice.innerHTML);
+    return MatchingMovieObjects 
+}
 
 
-// function optionGenreChanged(genre){
-//     GenreFilter = genre;
-//     FinalDropdown(genre);
-    
-// }
+function getSelectedOption(selectID){
+    let htmlElement = document.getElementById(selectID);
+    for (let i = 0; i < htmlElement.options.length; i++){
+        let option = htmlElement.options[i];
+        if(option.selected == true){
+            return option;
+        }
+    }
+    return null
+}
+// Above function code was modified from stackoverflow
 
-// function SecondFilterAge(){
+function getListOfMoviesByGenreAndAge(GenreChoice, AgeChoice){
+    let allMovies = myData;
+    let moviesMatchingGenre = filterList(allMovies, "genres", GenreChoice);
+    let moviesMatchingGenreAndAge = filterList(moviesMatchingGenre, "age", AgeChoice);
+    return moviesMatchingGenreAndAge;
+}
 
-
-// }
-
-function FinalDropdown(){
-    var GenreFilter = "Drama"
-    var AgeFilter = "7+" 
-    var MovieOptions = myData.filter(g =>{
-        return g.genres === GenreFilter;
-    }).filter(a =>{
-        return a.age === AgeFilter;
-    })
-        
-    var MovieTitles = MovieOptions.map(x => x.title)
-    console.log(MovieTitles)
-    
-    var selector = d3.select("#selMovie");
-              
-        MovieTitles.forEach(function(userchoice){
-                selector
-                .append("option")
-                .text(userchoice)
-                .property("value", userchoice);
-        });
+function filterList(listdata, key, value){
+    return listdata.filter(x => x[key] === value);
 
 }
-FinalDropdown();
 
+function clearDropDown(selectID){
+    let htmlElement = document.getElementById(selectID);
+    let size = htmlElement.options.length;
+    for(i = size-1; i>=0; i--){
+        htmlElement.options[i] = null;
+    }
+// This was found online by google searching how to clear a dropdown
+}
 
-// Filters info to get movie titles
-// function MovieDropDownList(genre){
+function appendDropDownOptions( selectID, listofOptions){
+    let selector = d3.select("#" + selectID);
+    listofOptions.forEach(function(MovieObject){
+        selector
+        .append("option")
+        .text(MovieObject.title)
+        .property("value", MovieObject.title)
+        .property("makeobjectliveinHTML", MovieObject)
+    });
 
-//     var GenreFilter = d3.select("#selGenre").node().value; 
-// // var AgeFilter = d3.select("#selAge").node().value; 
-//     var AgeFilter = "7+" 
-
-//     var MovieOptions = ArrData.filter(g =>{
-//         return g[2] === GenreFilter
-//     }).filter(a =>{
-//         return a[0] === AgeFilter
-//     })
-        
-//     var MovieTitles = MovieOptions.map(x => x[9])
-//     console.log(MovieTitles)
+}
+function displayCurrentMovieData(){
+    let displaybox = d3.select("#movie-display");
+    displaybox.html("")
+    let userMovieChoice = getSelectedOption("selMovie").innerHTML;
+    let MovieObject = getMovieObject(userMovieChoice)[0];
+    console.log(MovieObject);
     
-//     
+    Object.entries(MovieObject).forEach(function([key, value]){
+        return displaybox.append("h4").text(`${key}: ${value}`);
+    });
     
-//     // Populates the movie titles bases on filter.
-//     var selector = d3.select("#selMovie");
-          
-//     MovieTitles.forEach(function(userchoice){
-//             selector
-//             .append("option")
-//             .text(userchoice)
-//             .property("value", userchoice);
-//     });
 
+}
 
+function getMovieObject(movieChoice){
+    let allMovies = myData;
+    let moviesMatchingMovieTitle = filterList(allMovies, "title", movieChoice);
+    return moviesMatchingMovieTitle;
+}
 
-// }
-// function optionGenreChanged(clicked){
-//     MovieDropDownList(clicked);
-// }
-// function optionAgeChanged(clicked){
-//     MovieDropDownList(clicked)
-// }
-// MovieDropDownList();
-
-
-// Create an event to trigger the first genre selection - optionGenreChanged
-// Create an event to trigger the second age selection - optionAgeChanged
-
-
-
-
-        
-// Create function for when option changes in the movies, to populate all movie info.
-// optionMovieChanged is the name in html
-// return full array as object when option === a certain movie title from the selector.
+    

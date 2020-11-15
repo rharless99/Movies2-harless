@@ -106,9 +106,10 @@ var tracePie = {
 var PieData = [tracePie]
  var PieLayout = {
      title: 'Genre Popularity',
-     height: 400,
-     width: 500,
-     showlegend: true
+    //  height: 400,
+    //  width: 500,
+     showlegend: true,
+     automargin: true
        
  }
 

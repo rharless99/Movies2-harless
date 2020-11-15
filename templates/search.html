@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Movie Streaming</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="static/css/searchstyle.css">
+  <link rel="stylesheet" href="../static/css/searchstyle.css">
 
 </head>
 
@@ -17,7 +17,7 @@
     <img class= "image_banner" src="https://previews.123rf.com/images/kchung/kchung1812/kchung181200084/126832986-caramel-popcorn-banner-ads-with-flying-corns-and-cinema-items-in-3d-illustration.jpg" alt="..." >
     </a>
   </div>
-  
+
     <div class="row">
       <div class="col-md-12 jumbotron text-center">
         <h1>Movie Streaming Dashboard</h1>
@@ -28,12 +28,12 @@
       <a href="/" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Home</a>
   </button>
     <div class="row">
-        
+
         <div class="col-md-4">
             <div class="box">
                 <div class="well">
                     <h5>Genre:</h5>
-                    <select id="selGenre" onchange="optionGenreChanged(this.value)">
+                    <select id="selGenre" onchange="rebuildMovieTitleList();">
                       <option value = "0">Action</option>
                       <option value = "1">Adventure</option>
                       <option value = "2">Animation</option>
@@ -52,23 +52,23 @@
             <div class="box">
                 <div class="well">
                     <h5>Age Appropriate:</h5>
-                    <select id="selAge" onchange="optionAgeChanged(this.value)">
+                    <select id="selAge" onchange="rebuildMovieTitleList();">
                       <option>7+</option>
                       <option>13+</option>
                       <option>16+</option>
                       <option>18+</option>
                       <option>all</option>
-                    
+
                     </select>
-                  </div>  
+                  </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="box">
                 <div class="well">
                     <h5>Movie:</h5>
-                    <select id="selMovie" onchange="optionMovieChanged(this.value)"></select>
-                  </div>  
+                    <select id="selMovie" onchange="displayCurrentMovieData();"></select>
+                  </div>
             </div>
         </div>
     </div>
@@ -78,12 +78,13 @@
           <div class="panel-heading">
             <h3 class="panel-title">Movie Info</h3>
           </div>
-          <div id="sample-metadata" class="panel-body"></div>
+          <div id="movie-display" class="panel-body"> 
+          </div>
         </div>
       </div>
-      
+
     </div>
-    
+
   <h1 id = "ThankYouMessage">Thank you for searching with us, use the links below to watch your movie. </h1>
     <div id = "platform_row">
       <div class = "col-md-4">
@@ -101,17 +102,13 @@
           <img id= "prime_image" src="https://miro.medium.com/max/5108/1*k1OZBUe6f8pzEbjlYfYZ9A.png" alt="..." >
           </a>
       </div>
-
-
-
-      
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <script src="/static/js/searchapp.js"></script>
-  
-  
+  <script src="../static/js/searchapp.js"></script>
+
+
 
 </body>
 

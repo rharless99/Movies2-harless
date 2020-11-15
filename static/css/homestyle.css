@@ -27,6 +27,9 @@ p {
     font-weight: "strong";
 }
 
-/* #pierow {
-    margin-left: 300px
-} */
+#PieSummary {
+    margin-left: 450px;
+    color: red;
+    font-weight: "strong";
+    font-size: 18px
+}
